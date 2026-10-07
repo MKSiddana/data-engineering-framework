@@ -1,0 +1,34 @@
+{
+  "pipeline": {
+    "name": "customer_data_pipeline",
+    "environment": "development",
+    "max_retries": 3,
+    "retry_delay_seconds": 2
+  },
+  "source": {
+    "type": "csv",
+    "path": "data/sample_customers.csv"
+  },
+  "target": {
+    "type": "sqlite",
+    "path": "output/data_engineering_framework.db",
+    "table": "customers"
+  },
+  "data_quality": {
+    "required_columns": [
+      "customer_id",
+      "customer_name",
+      "email",
+      "country",
+      "last_updated"
+    ],
+    "unique_columns": [
+      "customer_id"
+    ],
+    "allow_nulls": false
+  },
+  "monitoring": {
+    "enable_audit": true,
+    "enable_logging": true
+  }
+}
